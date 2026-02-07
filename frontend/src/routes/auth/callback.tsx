@@ -21,8 +21,8 @@ function AuthCallback() {
   }, [isAuthenticated, isLoading, navigate])
 
   return (
-    <div className="auth-callback">
-      <p>Completing sign in...</p>
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="text-muted-foreground">Completing sign in...</p>
     </div>
   )
 }

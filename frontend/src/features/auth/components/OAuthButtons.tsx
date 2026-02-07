@@ -28,12 +28,13 @@ export function OAuthButtons({ disabled = false }: OAuthButtonsProps) {
   }
 
   return (
-    <div className="oauth-buttons">
+    <div className="flex flex-col gap-3">
       {providers.map(({ id, label }) => (
         <Button
           key={id}
           type="button"
-          className={`oauth-button oauth-button--${id}`}
+          variant="outline"
+          className="w-full"
           onClick={() => handleOAuthLogin(id)}
           disabled={disabled || loadingProvider !== null}
         >
