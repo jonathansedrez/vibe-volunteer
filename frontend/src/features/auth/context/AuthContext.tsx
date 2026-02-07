@@ -11,7 +11,9 @@ import type { AuthProvider, SignInWithPasswordParams } from '../providers/types'
 
 interface AuthContextValue extends AuthState {
   signInWithOAuth: (provider: OAuthProvider) => Promise<void>
-  signInWithPassword: (params: SignInWithPasswordParams) => Promise<{ error: Error | null }>
+  signInWithPassword: (
+    params: SignInWithPasswordParams
+  ) => Promise<{ error: Error | null }>
   signOut: () => Promise<void>
   getAccessToken: () => Promise<string | null>
 }

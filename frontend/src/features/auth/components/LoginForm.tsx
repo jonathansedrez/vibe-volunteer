@@ -1,6 +1,15 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Input } from '@/shared/components'
+import {
+  Button,
+  Input,
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from '@/shared/components'
 import { loginSchema, type LoginFormData } from '../schemas'
 
 interface LoginFormProps {
@@ -9,35 +18,53 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ onSubmit, isLoading = false }: LoginFormProps) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormData>({
+  const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="login-form">
-      <Input
-        label="Email"
-        type="email"
-        placeholder="Enter your email"
-        error={errors.email?.message}
-        {...register('email')}
-      />
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input type="email" placeholder="Enter your email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <Input
-        label="Password"
-        type="password"
-        placeholder="Enter your password"
-        error={errors.password?.message}
-        {...register('password')}
-      />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="Enter your password"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <Button type="submit" disabled={isLoading}>
-        {isLoading ? 'Signing in...' : 'Sign in'}
-      </Button>
-    </form>
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? 'Signing in...' : 'Sign in'}
+        </Button>
+      </form>
+    </Form>
   )
 }

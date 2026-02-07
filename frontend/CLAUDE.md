@@ -12,6 +12,7 @@ Default to using Bun instead of Node.js.
 - TanStack Router (file-based routing)
 - TanStack Query (React Query)
 - react-hook-form + zod
+- shadcn/ui + Tailwind CSS v4
 - TypeScript
 - Vite (required for TanStack Router plugin)
 - Jest + React Testing Library
@@ -151,3 +152,65 @@ import { Button, Input, Card } from '@/shared/components'
 2. Add `components/`, `hooks/`, `schemas/` as needed
 3. Export public API from `index.ts`
 4. Create route in `src/routes/` that imports from the feature
+
+## shadcn/ui Components
+
+This project uses shadcn/ui with Tailwind CSS v4 for accessible, themeable UI components.
+
+### Adding New Components
+
+Use the shadcn CLI to add new components:
+
+```sh
+bunx shadcn@latest add <component>
+```
+
+Example:
+```sh
+bunx shadcn@latest add dialog
+bunx shadcn@latest add dropdown-menu
+```
+
+### Available Components
+
+Located in `src/shared/components/ui/`:
+- `button` - Button with variants (default, destructive, outline, secondary, ghost, link)
+- `input` - Text input with focus states
+- `label` - Accessible label using Radix
+- `card` - Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter
+- `form` - React Hook Form integration (Form, FormField, FormItem, FormLabel, FormControl, FormMessage)
+
+### Using the `cn()` Utility
+
+The `cn()` function combines clsx and tailwind-merge for conditional class names:
+
+```tsx
+import { cn } from '@/shared/lib/utils'
+
+function Component({ className, isActive }) {
+  return (
+    <div className={cn(
+      'base-classes',
+      isActive && 'active-classes',
+      className
+    )}>
+      Content
+    </div>
+  )
+}
+```
+
+### Theming with CSS Variables
+
+Theme colors are defined in `src/index.css` using CSS custom properties:
+
+- Light/dark mode via `@media (prefers-color-scheme: dark)`
+- Colors: `--color-background`, `--color-foreground`, `--color-primary`, etc.
+- Border radius: `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-xl`
+
+Use Tailwind classes that reference these variables:
+```tsx
+<div className="bg-background text-foreground">
+<button className="bg-primary text-primary-foreground">
+<p className="text-muted-foreground">
+```

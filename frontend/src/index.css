@@ -1,229 +1,82 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(222.2 84% 4.9%);
+
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(222.2 84% 4.9%);
+
+  --color-primary: hsl(222.2 47.4% 11.2%);
+  --color-primary-foreground: hsl(210 40% 98%);
+
+  --color-secondary: hsl(210 40% 96.1%);
+  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
+
+  --color-muted: hsl(210 40% 96.1%);
+  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+
+  --color-accent: hsl(210 40% 96.1%);
+  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
+
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive-foreground: hsl(210 40% 98%);
+
+  --color-border: hsl(214.3 31.8% 91.4%);
+  --color-input: hsl(214.3 31.8% 91.4%);
+  --color-ring: hsl(222.2 84% 4.9%);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
 }
 
-body {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
-  line-height: 1.5;
-  color: #1a1a1a;
-  background-color: #f5f5f5;
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-background: hsl(222.2 84% 4.9%);
+    --color-foreground: hsl(210 40% 98%);
+
+    --color-card: hsl(222.2 84% 4.9%);
+    --color-card-foreground: hsl(210 40% 98%);
+
+    --color-popover: hsl(222.2 84% 4.9%);
+    --color-popover-foreground: hsl(210 40% 98%);
+
+    --color-primary: hsl(210 40% 98%);
+    --color-primary-foreground: hsl(222.2 47.4% 11.2%);
+
+    --color-secondary: hsl(217.2 32.6% 17.5%);
+    --color-secondary-foreground: hsl(210 40% 98%);
+
+    --color-muted: hsl(217.2 32.6% 17.5%);
+    --color-muted-foreground: hsl(215 20.2% 65.1%);
+
+    --color-accent: hsl(217.2 32.6% 17.5%);
+    --color-accent-foreground: hsl(210 40% 98%);
+
+    --color-destructive: hsl(0 62.8% 30.6%);
+    --color-destructive-foreground: hsl(210 40% 98%);
+
+    --color-border: hsl(217.2 32.6% 17.5%);
+    --color-input: hsl(217.2 32.6% 17.5%);
+    --color-ring: hsl(212.7 26.8% 83.9%);
+  }
 }
 
-/* Button */
-button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: white;
-  background-color: #3b82f6;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-button:hover:not(:disabled) {
-  background-color: #2563eb;
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Input */
-.input-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.input-field label {
-  font-weight: 500;
-  font-size: 0.875rem;
-}
-
-.input {
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.input:focus {
-  border-color: #3b82f6;
-}
-
-.input-error {
-  border-color: #ef4444;
-}
-
-.error-message {
-  color: #ef4444;
-  font-size: 0.875rem;
-}
-
-/* Card */
-.card {
-  background: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.card-header {
-  padding: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.card-header h1,
-.card-header h2 {
-  margin-bottom: 0.25rem;
-}
-
-.card-header p {
-  color: #6b7280;
-}
-
-.card-content {
-  padding: 1.5rem;
-}
-
-/* Login Page */
-.login-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.login-card {
-  width: 100%;
-  max-width: 400px;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.login-form button {
-  margin-top: 0.5rem;
-}
-
-/* Home Page */
-.home-page {
-  min-height: 100vh;
-  padding: 2rem;
-}
-
-.home-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.home-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.home-header p {
-  color: #6b7280;
-  font-size: 1.125rem;
-}
-
-.home-content {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.welcome-card p {
-  margin-bottom: 1.5rem;
-  color: #4b5563;
-}
-
-.home-actions {
-  display: flex;
-  gap: 1rem;
-}
-
-.home-actions a {
-  text-decoration: none;
-}
-
-/* OAuth Buttons */
-.oauth-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.oauth-button {
-  width: 100%;
-  background-color: white;
-  color: #1a1a1a;
-  border: 1px solid #d1d5db;
-}
-
-.oauth-button:hover:not(:disabled) {
-  background-color: #f9fafb;
-}
-
-.oauth-button--google {
-  border-color: #4285f4;
-}
-
-.oauth-button--github {
-  border-color: #24292f;
-}
-
-/* Login Divider */
-.login-divider {
-  display: flex;
-  align-items: center;
-  margin: 1.5rem 0;
-}
-
-.login-divider::before,
-.login-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background-color: #e5e7eb;
-}
-
-.login-divider span {
-  padding: 0 1rem;
-  color: #6b7280;
-  font-size: 0.875rem;
-}
-
-/* Login Error */
-.login-error {
-  background-color: #fef2f2;
-  color: #dc2626;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
-}
-
-/* Auth Callback */
-.auth-callback {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
 }
