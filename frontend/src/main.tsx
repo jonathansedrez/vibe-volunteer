@@ -4,6 +4,7 @@ import './index.css'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { AuthContextProvider, supabaseAuthProvider } from '@/features/auth'
 import { routeTree } from './routeTree.gen'
 
 const queryClient = new QueryClient({
@@ -37,7 +38,9 @@ if (rootElement && !rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <AuthContextProvider provider={supabaseAuthProvider}>
+          <RouterProvider router={router} />
+        </AuthContextProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </StrictMode>

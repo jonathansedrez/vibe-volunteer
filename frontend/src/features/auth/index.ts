@@ -1,2 +1,7 @@
 export * from './components'
 export * from './schemas'
+export * from './hooks'
+export * from './types'
+export * from './context'
+export { supabaseAuthProvider } from './providers'
+export type { AuthProvider } from './providers'
